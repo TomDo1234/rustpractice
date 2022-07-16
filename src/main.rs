@@ -1,3 +1,4 @@
+#![allow(dead_code)] //I want to focus on most recent question, so some funcs are "unused"
 
 fn q1(ceilnum : i32) -> i32 {
     let mut sum: i32 = 0;
@@ -53,13 +54,18 @@ fn q3(mut primenum : i64) -> i64 {
 
 fn q4() -> i32 {
     let mut num = 0;
-    for x in 1..1000 {
-        for y in 1..1000 {
+    let mut biggestnum = num;
+    for x in 100..1000 {
+        for y in 100..1000 {
             num = x * y;
+            let strnum : String = format!("{:?}", num);
+            let reversed = strnum.chars().rev().collect::<String>();
+            if strnum == reversed && num > biggestnum {
+                biggestnum = num;
+            }
         }
     }
-    let strnum : String = format!("{:?}", num);
-    return 12
+    return biggestnum
 }
 
 fn main() {
