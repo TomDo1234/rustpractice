@@ -78,10 +78,22 @@ fn q5(ceilnum : i32) -> i32 {
     return finalnum;
 }
 
+fn q6(num : i32) -> i32 {
+    let nums : Vec<i32> = (1..num + 1).collect();
+    let summedsquares : i32 = nums.iter().map(|x| i32::pow(*x,2)).collect::<Vec<i32>>().iter().sum();
+    return i32::pow(nums.iter().sum() , 2) - summedsquares;
+}
+
+fn q7(n : i64) -> i64 {
+    return nthprime(n);
+}
+
 fn main() {
     //println!("{}",q1(1000));
     //println!("{}",q2(4000000));
     //println!("{}",q3(600851475143));
     //println!("{}",q4());
-    println!("{}",q5(20));
+    //println!("{}",q5(20));
+    //println!("{}",q6(100));
+    println!("{}",q7(10001));
 }
