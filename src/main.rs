@@ -68,9 +68,20 @@ fn q4() -> i32 {
     return biggestnum
 }
 
+fn q5(ceilnum : i32) -> i32 {
+    let nums : Vec<i32> = (1..ceilnum + 1).collect();
+    let mut finalnum = ceilnum;
+    while nums.iter().any(|x| finalnum % x != 0)  {
+        finalnum += ceilnum;
+        //println!("{}",finalnum);
+    }
+    return finalnum;
+}
+
 fn main() {
     //println!("{}",q1(1000));
     //println!("{}",q2(4000000));
     //println!("{}",q3(600851475143));
-    println!("{}",q4());
+    //println!("{}",q4());
+    println!("{}",q5(20));
 }
