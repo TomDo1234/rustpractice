@@ -299,7 +299,7 @@ fn q17(num : i32) -> usize {
     for i in 1..num + 1 {
         if numdict.contains_key(&i) {
             words.push(numdict.get(&i).unwrap().to_string());
-            println!("{:?}",numdict.get(&i).unwrap().to_string());
+            //println!("{:?}",numdict.get(&i).unwrap().to_string());
         }
         else {
             let digits : Vec<u32> = i.to_string().chars().map(|d| d.to_digit(10).unwrap()).collect();
