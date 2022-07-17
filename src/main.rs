@@ -211,6 +211,31 @@ fn q13(list : [BigInt ; 100]) -> String {
     return b.to_str_radix(10)[..10].to_string();
 }
 
+fn q14(ceilnum : i64) -> i64 {
+    let mut maxchainlength = vec![0,1];
+    let mut length = 0;
+    for i in 1..ceilnum {
+        let mut j = i;
+        while j != 1 {
+            if j % 2 == 1 {
+                j = (3*j + 1)/2;
+                length += 2;
+            }
+            else {
+                j /= 2;
+                length += 1;
+            }
+        }
+        if length > maxchainlength[0] {
+            maxchainlength[0] = length;
+            maxchainlength[1] = i;
+        }
+        length = 0;
+    }
+    return maxchainlength[1];
+}
+
 fn main() {
-    println!("{}",BigInt::new(1293013821903));
+    println!("{}",q14(1000000));
+
 }
