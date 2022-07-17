@@ -247,8 +247,88 @@ fn q15() -> u128 { //essentially this is 40!/20!/20!
     return a/b;
 }
 
+fn q16() -> u32 {
+    let base = BigInt::from(2);
+    let result = base.pow(1000);
+    return result.to_str_radix(10).chars().map(|c| c.to_digit(10).unwrap()).sum();
+}
+
+use std::collections::HashMap;
+fn q17(num : i32) -> usize {
+    let numdict = HashMap::from([
+        (0,""),
+        (1, "one"),
+        (2, "two"),
+        (3, "three"),
+        (4, "four"),
+        (5, "five"),
+        (6, "six"),
+        (7, "seven"),
+        (8, "eight"),
+        (9, "nine"),
+        (10, "ten"),
+        (11, "eleven"),
+        (12, "twelve"),
+        (13, "thirteen"),
+        (14, "fourteen"),
+        (15, "fifteen"),
+        (16, "sixteen"),
+        (17, "seventeen"),
+        (18, "eighteen"),
+        (19, "nineteen"),
+        (20, "twenty"),
+        (30, "thirty"),
+        (40, "forty"),
+        (50, "fifty"),
+        (60, "sixty"),
+        (70, "seventy"),
+        (80, "eighty"),
+        (90, "ninety"),
+        (100,"onehundred"),
+        (200,"twohundred"),
+        (300,"threehundred"),
+        (400,"fourhundred"),
+        (500,"fivehundred"),
+        (600,"sixhundred"),
+        (700,"sevenhundred"),
+        (800,"eighthundred"),
+        (900,"ninehundred"),
+        (1000, "onethousand")
+    ]);
+    let mut words = vec![];
+    for i in 1..num + 1 {
+        if numdict.contains_key(&i) {
+            words.push(numdict.get(&i).unwrap().to_string());
+            println!("{:?}",numdict.get(&i).unwrap().to_string());
+        }
+        else {
+            let digits : Vec<u32> = i.to_string().chars().map(|d| d.to_digit(10).unwrap()).collect();
+            let mut word = vec![];
+            if digits.len() == 3 { 
+                word.push(numdict.get(&(digits[0] as i32)).unwrap().to_string()) ; 
+                word.push("hundredand".to_string()) 
+            }
+            if digits[digits.len() - 2] != 1 {
+                word.push(numdict.get(&(digits[digits.len() - 2] as i32 * 10)).unwrap().to_string());
+                word.push(numdict.get(&(digits[digits.len() - 1] as i32)).unwrap().to_string());
+            }
+            else {
+                word.push(numdict.get(&((digits[1] * 10 + digits[2]) as i32)).unwrap().to_string());
+            }          
+            words.push(word.join(""));
+            //println!("{:?}",word.join(""));
+        }
+    }
+    let string = words.join("");
+    return string.chars().count();
+}
+
 fn main() {
     //println!("{}",q14(1000000));
-    println!("{}",q15());
+    //println!("{}",q15());
+    //println!("{}",q16());
+    //println!("{}",q17(1000));
+    println!("{}",q17(1000));
+   
 
 }
