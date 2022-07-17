@@ -235,7 +235,20 @@ fn q14(ceilnum : i64) -> i64 {
     return maxchainlength[1];
 }
 
+fn q15() -> u128 { //essentially this is 40!/20!/20!
+    let mut a = 1;
+    let mut b = 1;
+    for i in 21..41 { 
+        a *= i
+    }
+    for i in 2..21 {
+        b *= i
+    }
+    return a/b;
+}
+
 fn main() {
-    println!("{}",q14(1000000));
+    //println!("{}",q14(1000000));
+    println!("{}",q15());
 
 }
