@@ -206,14 +206,16 @@ fn q13(list : [i32 ; 100]) {
 
 }
 
-use num_bigint::{BigInt};
+use num_bigint::{BigInt, Sign};
 
 fn main() {
     //println!("{}",q12(500));
-    let list = [BigInt::from_bytes_be(b"37107287533902102798797998220837590246510135740250",10),
-    BigInt::from_bytes_be(b"46376937677490009712648124896970078050417018260538",10)];
+    let list = [BigInt::parse_bytes(b"37107287533902102798797998220837590246510135740250",10).unwrap(),
+    BigInt::parse_bytes(b"46376937677490009712648124896970078050417018260538",10).unwrap()];
 
-    list[0].checked_add(&list[1]);
+    let b = &list[0] + &list[1];
+    println!("{:?}",b);
+    println!("{:?}",list);
 
 
     // 74324986199524741059474233309513058123726617309629,
