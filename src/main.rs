@@ -116,6 +116,28 @@ fn q9(sum : i32) -> i32 {
     return failure;
 }
 
+
+
+fn primelist(n : usize) -> Vec<usize> {
+    let mut boolvec = vec![true ; n];
+    boolvec [1] = false; //1 is not prime!
+    let bound = (n as f64).sqrt().ceil();
+    for i in 2..(bound as usize) {
+        if boolvec[i] {
+            let mut j = i.pow(2);
+            while j < n {
+                boolvec[j] = false;
+                j += i;
+            }
+        }
+    }
+    return boolvec.iter().enumerate().filter(|(_ , &r)| r == true).map(|(index , _ )| index).collect();
+}
+
+fn q10(n : usize) -> usize {
+    return primelist(n).iter().sum();
+}
+
 fn main() {
     //println!("{}",q1(1000));
     //println!("{}",q2(4000000));
@@ -144,6 +166,6 @@ fn main() {
     //                 84580156166097919133875499200524063689912560717606
     //                 05886116467109405077541002256983155200055935729725
     //                 71636269561882670428252483600823257530420752963450"));
-    println!("{:?}",q9(1000));
-    
+    //println!("{:?}",q9(1000));
+    println!("{}",q10(2000000));
 }
