@@ -323,12 +323,63 @@ fn q17(num : i32) -> usize {
     return string.chars().count();
 }
 
+fn q18() -> i32 {
+    let tree : Vec<Vec<i32>> = vec![
+        vec![75],
+        vec![95,64],
+        vec![17,47,82],
+        vec![18,35,87,10],
+        vec![20,04,82,47,65],
+        vec![19,01,23,75,03,34],
+        vec![88,02,77,73,07,63,67],
+        vec![99,65,04,28,06,16,70,92],
+        vec![41,41,26,56,83,40,80,70,33],
+        vec![41,48,72,33,47,32,37,16,94,29],
+        vec![53,71,44,65,25,43,91,52,97,51,14],
+        vec![70,11,33,28,77,73,17,78,39,68,17,57],
+        vec![91,71,52,38,17,14,91,43,58,50,27,29,48],
+        vec![63,66,04,68,89,53,67,30,73,16,69,87,40,31],
+        vec![04,62,98,27,23,09,70,98,73,93,38,53,60,04,23]
+    ];    
+    fn recursion(tree : Vec<Vec<i32>>,level : usize) -> Vec<i32> {
+        let mut results = vec![];
+        for i in 0..tree[level].len() {
+            let tree2 = tree.clone();
+            if level == 13 {
+                if tree2[level + 1][i + 1] > tree2[level + 1][i] {
+                    results.push(tree2[level][i] + tree2[level + 1][i + 1])
+                }
+                else {
+                    results.push(tree2[level][i] + tree2[level + 1][i])
+                }
+            }
+            else if level < 13  {
+                let next = recursion(tree2.clone(),level + 1);
+                let mut result = tree2[level][i];
+                if next[i] > next[i + 1] {
+                    result += next[i];
+                }
+                else {
+                    result += next[i + 1];
+                }               
+                results.push(result);
+            }
+            else {
+                println!("sss");
+                return vec![0];
+            }
+        }
+        return results;
+    }   
+    return *recursion(tree,9).iter().max().unwrap();
+}
+
 fn main() {
     //println!("{}",q14(1000000));
     //println!("{}",q15());
     //println!("{}",q16());
     //println!("{}",q17(1000));
-    println!("{}",q17(1000));
+    println!("{}",q18());
    
 
 }
