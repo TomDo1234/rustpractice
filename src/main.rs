@@ -341,26 +341,20 @@ fn q18() -> i32 {
         vec![63,66,04,68,89,53,67,30,73,16,69,87,40,31],
         vec![04,62,98,27,23,09,70,98,73,93,38,53,60,04,23]
     ];    
-    fn recursion(tree : Vec<Vec<i32>>,level : usize) -> Vec<i32> {
+    fn recursion(tree : &Vec<Vec<i32>>,branchindex : usize , level : usize) -> Vec<i32> {
         let mut results = vec![];
-        for i in 0..tree[level].len() {
-            let tree2 = tree.clone();
-            if level == 13 {
-                if tree2[level + 1][i + 1] > tree2[level + 1][i] {
-                    results.push(tree2[level][i] + tree2[level + 1][i + 1])
-                }
-                else {
-                    results.push(tree2[level][i] + tree2[level + 1][i])
-                }
+        for i in branchindex..branchindex+2 {
+            if level == 14 {
+                results.push(tree[level][i])
             }
-            else if level < 13  {
-                let next = recursion(tree2.clone(),level + 1);
-                let mut result = tree2[level][i];
-                if next[i] > next[i + 1] {
-                    result += next[i];
+            else if level < 14  {
+                let next = recursion(tree,i,level + 1);
+                let mut result = tree[level][i];
+                if next[0] > next[1] {
+                    result += next[0];
                 }
                 else {
-                    result += next[i + 1];
+                    result += next[1];
                 }               
                 results.push(result);
             }
@@ -371,7 +365,8 @@ fn q18() -> i32 {
         }
         return results;
     }   
-    return *recursion(tree,9).iter().max().unwrap();
+    let topnum = tree[0][0];
+    return *recursion(&tree,0,1).iter().max().unwrap() + topnum;
 }
 
 fn main() {
