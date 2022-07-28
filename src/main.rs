@@ -183,11 +183,10 @@ fn divisors(num : i32) -> Vec<i32> {
         if num % i == 0 {
             factors.push(i);
             if i != num/i {
-                factors.push(i);
+                factors.push(num/i);
             }
         }
     }
-    factors.push(num);
     return factors;
 }
 
@@ -383,10 +382,25 @@ fn q20(upper : i32) -> u32 {
 
 
 
-fn q21() -> Vec<i32> {
-    let a = divisors(50).pop().iter().sum(); // -1 because 1 is a divisor
-    let b = divisors(70).pop().iter().sum();
-    return vec![a,b];
+fn q21() -> i32 {
+    let mut d_of_ns : Vec<i32> = vec![];
+    let mut pairs : Vec<Vec<i32>> = vec![];
+    let mut sum = 0;
+    for i in 1..10001 {
+        let properdivisorsum = divisors(i).iter().sum::<i32>() - i; //get sum of PROPER divisors
+        if d_of_ns.contains(&i) {
+            for j in 0..i-1 {
+                if d_of_ns[j as usize] == i && j + 1 == properdivisorsum {
+                    sum += i;
+                    sum += j;
+                    pairs.push(vec![j,i]);
+                }
+            }
+        }
+        d_of_ns.push(properdivisorsum); 
+    }
+    println!("{:?}",pairs);
+    return sum;
 }
 
 fn main() {
