@@ -393,7 +393,7 @@ fn q21() -> i32 {
                 if d_of_ns[j as usize] == i && j + 1 == properdivisorsum {
                     sum += i;
                     sum += j;
-                    pairs.push(vec![j,i]);
+                    pairs.push(vec![j + 1,i]);
                 }
             }
         }
