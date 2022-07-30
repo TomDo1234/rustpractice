@@ -429,8 +429,33 @@ fn q22() -> i32 {
     return values.iter().sum();
 }
 
+fn q23() -> i32 {
+    let mut thelist : Vec<i32> = vec![];
+    let mut thenumbers : Vec<i32> = vec![];
+    for i in 1..14063 { //14063 is 1 more than half of 28123
+        if divisors(i).iter().sum::<i32>() - i > i {
+            thelist.push(i);
+        }
+    }
+
+    for i in 0..thelist.len() {
+        for j in &thelist[i..] {
+            let num = thelist[i]+j;
+            if !thenumbers.contains(&num) {
+                thenumbers.push(num);
+            }
+        }
+    }
+    println!("{:?}",thelist);
+    
+    let thenumbers : Vec<i32> = ((30..28124).step_by(2)).collect(); //all even numbers less than 30 are not sum of 2 abundant numbers
+
+    return thenumbers.iter().sum::<i32>() - 34 - 46; //neither are 34 and 46
+}
+
 fn main() {
     //println!("{}",q19());
     //println!("{:?}",q21());
-    println!("{:?}",q22());
+    // println!("{:?}",q22());
+    println!("{}",q23());
 }
