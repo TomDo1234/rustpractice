@@ -451,9 +451,22 @@ fn q23() -> i32 {
     return (1..28124).sum::<i32>() - thenumbers.iter().sum::<i32>(); 
 }
 
+fn q24() -> i64 {
+    for i in 123456789..9876543211 as i64 { //9876543210 + 1
+        let mut j : Vec<u32> = i.to_string().chars().flat_map(|ch| ch.to_digit(10)).collect();
+        if i < 1000000000 {
+            j.insert(0,0);
+        }
+        println!("{:?}",j);
+        return 0;
+    }
+    return 0;
+}
+
 fn main() {
     //println!("{}",q19());
     //println!("{:?}",q21());
     // println!("{:?}",q22());
-    println!("{}",q23());
+    //println!("{}",q23());
+    println!("{}",q24());
 }
