@@ -392,7 +392,7 @@ fn q21() -> i32 {
             for j in 0..i-1 {
                 if d_of_ns[j as usize] == i && j + 1 == properdivisorsum {
                     sum += i;
-                    sum += j;
+                    sum += j + 1;
                     pairs.push(vec![j + 1,i]);
                 }
             }
@@ -403,7 +403,34 @@ fn q21() -> i32 {
     return sum;
 }
 
+use std::fs;
+fn q22() -> i32 {
+    // --snip--
+    let filename = "./src/p022_names.txt";
+
+    let lettervalue : HashMap<char,i32> = HashMap::from([('A',1),('B',2),('C',3),('D',4),('E',5),('F',6),('G',7),
+    ('H',8),('I',9),('J',10),('K',11),('L',12),('M',13),('N',14),
+    ('O',15),('P',16),('Q',17),('R',18),('S',19),('T',20),('U',21),('V',22),('W',23),('X',24),('Y',25),('Z',26)]);
+
+    let contents = match fs::read_to_string(filename) {
+        Ok(content) => content.replace('"',""),
+        Err(error) => panic!("Problem reading the file: {:?}", error)
+    };
+
+    let mut contents : Vec<&str> = contents.split(",").collect();
+    contents.sort();
+
+
+    let mut values : Vec<i32> = vec![];
+    for i in 0..contents.len() {
+        let wordvalue : i32 = contents[i].chars().map(|x| lettervalue.get(&x).unwrap()).sum();
+        values.push((i as i32 + 1) * wordvalue);
+    }
+    return values.iter().sum();
+}
+
 fn main() {
     //println!("{}",q19());
-    println!("{:?}",q21());
+    //println!("{:?}",q21());
+    println!("{:?}",q22());
 }
