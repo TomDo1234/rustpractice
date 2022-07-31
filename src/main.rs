@@ -451,7 +451,7 @@ fn q23() -> i32 {
     return (1..28124).sum::<i32>() - thenumbers.iter().sum::<i32>(); 
 }
 
-fn factorial(num : i32) -> i32 {
+fn factorial(num : usize) -> i32 {
     let mut res = 1;
     for i in 1..num + 1 {
         res *= i;
@@ -463,7 +463,7 @@ fn q24() -> String {
     let mut digits : Vec<i32> = vec![];
     let mut remainingdigits = vec![0,1,2,3,4,5,6,7,8,9];
     let mut i = 0;
-    let mut facbase = 10;
+    let mut facbase = remainingdigits.len();
     while i < 1000000 && facbase > 0 {
         let mut mult = 0;
         let fac = factorial(facbase);
