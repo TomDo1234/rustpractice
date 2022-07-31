@@ -451,22 +451,42 @@ fn q23() -> i32 {
     return (1..28124).sum::<i32>() - thenumbers.iter().sum::<i32>(); 
 }
 
-fn q24() -> i64 {
-    for i in 123456789..9876543211 as i64 { //9876543210 + 1
-        let mut j : Vec<u32> = i.to_string().chars().flat_map(|ch| ch.to_digit(10)).collect();
-        if i < 1000000000 {
-            j.insert(0,0);
+fn factorial(num : i32) -> i32 {
+    let mut res = 1;
+    for i in 1..num + 1 {
+        res *= i;
+    }   
+    return res;
+}
+
+fn q24() -> String {
+    let mut digits : Vec<i32> = vec![];
+    let mut remainingdigits = vec![0,1,2,3,4,5,6,7,8,9];
+    let mut i = 0;
+    let mut facbase = 10;
+    while i < 1000000 && facbase > 0 {
+        let mut mult = 0;
+        let fac = factorial(facbase);
+        let mut j = fac;
+        while i + j < 1000000 {
+            mult += 1;
+            j = mult * fac;
         }
-        println!("{:?}",j);
-        return 0;
+        if mult != 0 {
+            i += (mult - 1) * fac; 
+            digits.push(remainingdigits[(mult - 1) as usize]);
+            remainingdigits.remove((mult - 1) as usize);
+        }
+        facbase -= 1;
     }
-    return 0;
+    digits.push(remainingdigits[0]);
+    return digits.iter().map(|v| v.to_string()).collect::<String>(); //covert vector of digits to number
 }
 
 fn main() {
     //println!("{}",q19());
     //println!("{:?}",q21());
     // println!("{:?}",q22());
-    //println!("{}",q23());
+    //println!("{}",q23()); 2783915460
     println!("{}",q24());
 }
