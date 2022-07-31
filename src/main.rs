@@ -483,10 +483,26 @@ fn q24() -> String {
     return digits.iter().map(|v| v.to_string()).collect::<String>(); //covert vector of digits to number
 }
 
+fn q25() -> i32 {
+    let mut a = BigInt::parse_bytes(b"1",10).unwrap();
+    let mut b = BigInt::parse_bytes(b"1",10).unwrap();
+    let limit = BigInt::parse_bytes(b"10",10).unwrap().pow(999);
+    let mut c = a.checked_add(&b).unwrap();
+    let mut i = 2;
+    while c < limit {
+        c = a.checked_add(&b).unwrap();
+        a = b;
+        b = c.clone();
+        i += 1;
+    }
+    return i;
+}
+
 fn main() {
     //println!("{}",q19());
     //println!("{:?}",q21());
     // println!("{:?}",q22());
     //println!("{}",q23()); 2783915460
-    println!("{}",q24());
+    //println!("{}",q24());
+    println!("{}",q25());
 }
