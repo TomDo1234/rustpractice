@@ -451,7 +451,7 @@ fn q23() -> i32 {
     return (1..28124).sum::<i32>() - thenumbers.iter().sum::<i32>(); 
 }
 
-fn factorial(num : usize) -> i32 {
+fn factorial(num : usize) -> usize {
     let mut res = 1;
     for i in 1..num + 1 {
         res *= i;
