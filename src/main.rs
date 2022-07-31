@@ -498,11 +498,33 @@ fn q25() -> i32 {
     return i;
 }
 
+fn q26() -> i32 {
+    let base = 1000;
+    let mut max_recursions = 0;
+    let mut d = 1;
+    for i in 1..base {
+        let mut remainders : Vec<i32> = vec![];
+        let mut remainder = base % i;
+        while remainder != 0 && !remainders.contains(&remainder) {
+            remainders.push(remainder);
+            remainder = remainder * 10 * i.to_string().len() as i32 % i;
+        }
+        if remainders.len() > max_recursions {
+            max_recursions = remainders.len();
+            d = i;
+        }
+        //println!("{:?}",remainders);
+    }
+    return d;
+}
+
 fn main() {
     //println!("{}",q19());
     //println!("{:?}",q21());
     // println!("{:?}",q22());
     //println!("{}",q23()); 2783915460
     //println!("{}",q24());
-    println!("{}",q25());
+    //println!("{}",q25());
+    //println!("{}",q26());
+    println!("{}",q26());
 }
