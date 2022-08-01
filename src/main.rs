@@ -584,6 +584,18 @@ fn q28(layers : i32) -> i32 {
     return init;
 }
 
+fn q29(upper : i32) -> usize {
+    let mut distinct_terms : HashSet<BigInt> = HashSet::new();
+    for i in 2..upper + 1 {
+        let base = BigInt::from(i);
+        for j in 2..upper + 1 {
+            let term : BigInt = base.pow(j as u32);
+            distinct_terms.insert(term);
+        }
+    }
+    return distinct_terms.len();
+}
+
 fn main() {
     //println!("{}",q19());
     //println!("{:?}",q21());
@@ -594,5 +606,7 @@ fn main() {
     //println!("{}",q26());
     //println!("{}",q26());
     //println!("{}",q27());
-    println!("{}",q28(501));
+    //println!("{}",q28(501));
+    //println!("{}",q28(501));
+    println!("{}",q29(5));
 }
