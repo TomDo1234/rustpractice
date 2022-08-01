@@ -608,5 +608,5 @@ fn main() {
     //println!("{}",q27());
     //println!("{}",q28(501));
     //println!("{}",q28(501));
-    println!("{}",q29(5));
+    println!("{}",q29(100));
 }
