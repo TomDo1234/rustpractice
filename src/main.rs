@@ -596,6 +596,18 @@ fn q29(upper : i32) -> usize {
     return distinct_terms.len();
 }
 
+fn q30(power : u32) -> u32 {
+    let mut total = 0;
+    for i in 10..200000 { //1 digit numbers aren't sums so we start from 10
+        let digits = i.to_string().chars().map(|x| x.to_digit(10).unwrap().pow(power)).collect::<Vec<u32>>();
+        let sum : u32 = digits.iter().sum();
+        if sum == i {
+            total += i;
+        }
+    }
+    return total;
+}
+
 fn main() {
     //println!("{}",q19());
     //println!("{:?}",q21());
@@ -608,5 +620,6 @@ fn main() {
     //println!("{}",q27());
     //println!("{}",q28(501));
     //println!("{}",q28(501));
-    println!("{}",q29(100));
+    //println!("{}",q29(100));
+    println!("{}",q30(5));
 }
