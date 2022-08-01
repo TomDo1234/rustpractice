@@ -518,6 +518,72 @@ fn q26() -> i32 {
     return d;
 }
 
+fn isprime(num : i32) -> bool {
+    let thefloat : f32 = num as f32;
+    if num < 2 {
+        return false;
+    }
+    for i in 2..(thefloat.sqrt() + 1.0).floor() as i32 {
+        if num % i == 0 {
+            return false;
+        }
+    }
+    return true;
+} 
+
+fn q27() -> i32 {
+    fn polynomial (a : i32,b : i32,n : i32) -> i32 {
+        return n.pow(2) + a * n + b;
+    }
+
+    let mut primes : Vec<i32> = vec![];
+    let mut most_primes = 0;
+    let mut lastprime = 1;
+    let mut i = 1;
+    let mut besta = 0;
+    let mut bestb = 0;
+    while lastprime <= 1000 {
+        lastprime = nthprime(i);
+        primes.push(lastprime as i32);
+        primes.push(-lastprime as i32);
+        i += 1;
+    }
+    primes.remove(primes.len() - 1);
+    primes.remove(primes.len() - 1);
+    for a in -999..1000 {
+        for b in &primes {
+            let mut n = 0;
+            let mut ongoing = true;
+            while ongoing {
+                ongoing = isprime(polynomial(a,*b,n));
+                if n > most_primes {
+                    most_primes = n;
+                    besta = a;
+                    bestb = *b;
+                }
+                n += 1;
+            }    
+        }
+    }
+    println!("{} {} {}",besta,bestb,most_primes);
+    return besta * bestb;
+}
+
+fn q28(layers : i32) -> i32 {
+    let mut beforeringlength = 1;
+    let mut ringlength = 8;
+    let mut init = 1;
+    for i in 2..layers+1 {
+        init += ringlength + beforeringlength;
+        init += ringlength - 2*(i-1) + beforeringlength;
+        init += ringlength - 4*(i-1) + beforeringlength;
+        init += ringlength - 6*(i-1) + beforeringlength;
+        beforeringlength += ringlength;
+        ringlength += 8;
+    }
+    return init;
+}
+
 fn main() {
     //println!("{}",q19());
     //println!("{:?}",q21());
@@ -526,5 +592,7 @@ fn main() {
     //println!("{}",q24());
     //println!("{}",q25());
     //println!("{}",q26());
-    println!("{}",q26());
+    //println!("{}",q26());
+    //println!("{}",q27());
+    println!("{}",q28(501));
 }
